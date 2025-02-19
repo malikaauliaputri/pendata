@@ -1,9 +1,15 @@
-# Welcome to your Jupyter Book
+# Penambangan Data
+## Pengantar Data Mining
+##### Nama : Malika Aulia Putri
+##### NIM  : 230411100187
+##### Prodi : Teknik Informatika
+##### Email : malikaauliaaa2@gmai.com
+### Apa itu Data Mining?
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Data mining adalah proses mengekstraksi informasi atau pola yang berguna dari sekumpulan data besar
+menggunakan teknik statistik, machine learning, dan kecerdasan bauatan.
+Tujuan utama data mining adalah menemukan hubungan tersembunyi, tren atau pola yang dapat digunakan
+untuk pengambilan keputusan.
 
 Check out the content pages bundled with this sample book to see more.
 
