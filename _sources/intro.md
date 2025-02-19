@@ -11,7 +11,3 @@ menggunakan teknik statistik, machine learning, dan kecerdasan bauatan.
 Tujuan utama data mining adalah menemukan hubungan tersembunyi, tren atau pola yang dapat digunakan
 untuk pengambilan keputusan.
 
-Check out the content pages bundled with this sample book to see more.
-
-```{tableofcontents}
-```
