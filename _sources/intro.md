@@ -3,7 +3,7 @@
 ##### Nama : Malika Aulia Putri
 ##### NIM  : 230411100187
 ##### Prodi : Teknik Informatika
-##### Email : malikaauliaaa2@gmai.com
+##### Email : malikaauliaaa2@gmail.com
 ### Apa itu Data Mining?
 
 Data mining adalah proses mengekstraksi informasi atau pola yang berguna dari sekumpulan data besar
