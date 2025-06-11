@@ -1,0 +1,91 @@
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# === 2. Uji 2 Data Baru ===
+uji_baru = pd.DataFrame({
+    'Panjang Tangkai (cm)': [51, 59],
+    'Diameter Bunga (cm)': [7.0, 8.6]
+})
+prediksi = clf.predict(uji_baru)
+hasil = le.inverse_transform(prediksi)
+
+print("\n=== Prediksi 2 Data Baru ===")
+for i, (p, d) in enumerate(zip(uji_baru['Panjang Tangkai (cm)'], uji_baru['Diameter Bunga (cm)'])):
+    print(f"Data {i+1}: Panjang={p} cm, Diameter={d} cm → Prediksi: {hasil[i]}")
+
+# === 3. Visualisasi Decision Boundary ===
+print("\n=== Visualisasi Decision Boundary ===")
+plot_colors = "ry"
+plot_step = 0.1
+
+x_min, x_max = X['Panjang Tangkai (cm)'].min() - 2, X['Panjang Tangkai (cm)'].max() + 2
+y_min, y_max = X['Diameter Bunga (cm)'].min() - 0.5, X['Diameter Bunga (cm)'].max() + 0.5
+
+xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),
+                     np.arange(y_min, y_max, plot_step))
+
+grid = np.c_[xx.ravel(), yy.ravel()]
+grid_df = pd.DataFrame(grid, columns=['Panjang Tangkai (cm)', 'Diameter Bunga (cm)'])
+Z = clf.predict(grid_df)
+Z = Z.reshape(xx.shape)
+
+plt.figure(figsize=(8, 6))
+plt.contourf(xx, yy, Z, cmap=plt.cm.RdYlBu, alpha=0.6)
+
+# Plot titik data training
+for label, color in zip([0, 1], plot_colors):
+    idx = np.where(y == label)
+    plt.scatter(X.iloc[idx]['Panjang Tangkai (cm)'], X.iloc[idx]['Diameter Bunga (cm)'],
+                c=color, edgecolor='k', label=le.inverse_transform([label])[0])
+
+# Plot titik uji baru
+plt.scatter(uji_baru['Panjang Tangkai (cm)'], uji_baru['Diameter Bunga (cm)'],
+            c='black', marker='x', s=100, label='Data Uji')
+
+plt.xlabel("Panjang Tangkai (cm)")
+plt.ylabel("Diameter Bunga (cm)")
+plt.title("Decision Boundary (Panjang vs Diameter Bunga)")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+------------------
+
+----- stdout -----
+
+=== Prediksi 2 Data Baru ===
+Data 1: Panjang=51 cm, Diameter=7.0 cm → Prediksi: Rosa chinensis
+Data 2: Panjang=59 cm, Diameter=8.6 cm → Prediksi: Rosa gallica
+
+=== Visualisasi Decision Boundary ===
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[2], line 21[0m
+[1;32m     18[0m x_min, x_max [38;5;241m=[39m X[[38;5;124m'[39m[38;5;124mPanjang Tangkai (cm)[39m[38;5;124m'[39m][38;5;241m.[39mmin() [38;5;241m-[39m [38;5;241m2[39m, X[[38;5;124m'[39m[38;5;124mPanjang Tangkai (cm)[39m[38;5;124m'[39m][38;5;241m.[39mmax() [38;5;241m+[39m [38;5;241m2[39m
+[1;32m     19[0m y_min, y_max [38;5;241m=[39m X[[38;5;124m'[39m[38;5;124mDiameter Bunga (cm)[39m[38;5;124m'[39m][38;5;241m.[39mmin() [38;5;241m-[39m [38;5;241m0.5[39m, X[[38;5;124m'[39m[38;5;124mDiameter Bunga (cm)[39m[38;5;124m'[39m][38;5;241m.[39mmax() [38;5;241m+[39m [38;5;241m0.5[39m
+[0;32m---> 21[0m xx, yy [38;5;241m=[39m [43mnp[49m[38;5;241m.[39mmeshgrid(np[38;5;241m.[39marange(x_min, x_max, plot_step),
+[1;32m     22[0m                      np[38;5;241m.[39marange(y_min, y_max, plot_step))
+[1;32m     24[0m grid [38;5;241m=[39m np[38;5;241m.[39mc_[xx[38;5;241m.[39mravel(), yy[38;5;241m.[39mravel()]
+[1;32m     25[0m grid_df [38;5;241m=[39m pd[38;5;241m.[39mDataFrame(grid, columns[38;5;241m=[39m[[38;5;124m'[39m[38;5;124mPanjang Tangkai (cm)[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mDiameter Bunga (cm)[39m[38;5;124m'[39m])
+
+[0;31mNameError[0m: name 'np' is not defined
+
